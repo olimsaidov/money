@@ -24,13 +24,10 @@ class Currency
      */
     public function __construct($name)
     {
-        if(!isset(static::$currencies)) {
-           static::$currencies = require __DIR__.'/currencies.php';
-        }
-
-        if (!array_key_exists($name, static::$currencies)) {
+        if (!preg_match('/^[A-Z]{3}$/', $name)) {
             throw new UnknownCurrencyException($name);
         }
+        
         $this->name = $name;
     }
 
